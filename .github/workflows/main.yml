@@ -1,0 +1,24 @@
+name: Download ZIP File
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Runs every hour (modify as needed)
+  workflow_dispatch:  # Allows manual runs
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download ZIP File
+        run: curl -o data.zip "https://arlweb.msha.gov/OpenGovernmentData/DataSets/Mines.zip"
+
+      - name: Commit & Push to Repository
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data.zip
+          git commit -m "Updated ZIP file" || exit 0
+          git push
