@@ -1,0 +1,2 @@
+      - name: Debug Download
+        run: curl -v -o yourfile.zip "https://example.com/yourfile.zip"
