@@ -5,6 +5,9 @@ on:
     - cron: '0 1 * * *'  # Runs every hour (modify as needed)
   workflow_dispatch:  # Allows manual runs
 
+permissions:
+  contents: write  # This gives permission to create releases
+
 jobs:
   download:
     runs-on: ubuntu-latest
