@@ -1,0 +1,27 @@
+name: Download MSHA Mines Zip
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Runs daily at 1:00 AM UTC
+  workflow_dispatch:  # Allows manual runs
+
+permissions:
+  contents: write  # This gives permission to create releases
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download MSHA Mines ZIP
+        run: curl -o msha-mines.zip "https://arlweb.msha.gov/OpenGovernmentData/DataSets/Mines.zip"
+
+      - name: Upload ZIP File as Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: msha-mines.zip
+          tag_name: msha-mines
+          name: "MSHA Mines ZIP"
+          token: ${{ secrets.GITHUB_TOKEN }}
