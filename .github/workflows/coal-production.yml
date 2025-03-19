@@ -1,4 +1,4 @@
-name: Download MSHA Mines Zip
+name: Download MSHA Annual Coal Production Zip
 
 on:
   schedule:
@@ -16,12 +16,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download MSHA Mines ZIP
-        run: curl -o msha-mines.zip "https://arlweb.msha.gov/OpenGovernmentData/DataSets/Mines.zip"
+        run: curl -o annual-coal-production.zip "https://arlweb.msha.gov/OpenGovernmentData/DataSets/MinesProdYearly.zip"
 
       - name: Upload ZIP File as Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          files: msha-mines.zip
-          tag_name: msha-mines
-          name: "MSHA Mines ZIP"
+          files: annual-coal-production.zip
+          tag_name: annual-coal-production
+          name: "Annual Coal Production ZIP"
           token: ${{ secrets.GITHUB_TOKEN }}
